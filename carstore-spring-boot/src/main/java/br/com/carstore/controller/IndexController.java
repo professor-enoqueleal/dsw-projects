@@ -1,27 +1,31 @@
 package br.com.carstore.controller;
 
 import br.com.carstore.model.Car;
+import br.com.carstore.model.CarDTO;
+import br.com.carstore.model.CarResponseEntity;
+import br.com.carstore.service.CarService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class IndexController {
 
-    @GetMapping("/")
-    public String index() {
+    private CarService carService;
 
-        return "<h1>Hello, world!</h1>";
-
+    public IndexController(CarService carService) {
+        this.carService = carService;
     }
 
-    @GetMapping("/car")
-    public ResponseEntity<Car> home() {
+    @GetMapping("/api/cars")
+    public ResponseEntity<CarResponseEntity> home() {
 
-        Car car = new Car();
-        car.setName("Fusca");
-        car.setColor("Amarelo");
+        List<CarDTO> cars = carService.findAll();
 
-       return ResponseEntity.ok(car);
+        CarResponseEntity carResponseEntity = new CarResponseEntity(cars);
+
+        return ResponseEntity.ok(carResponseEntity);
 
     }
 
