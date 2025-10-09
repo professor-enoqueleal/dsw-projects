@@ -1,5 +1,8 @@
 package br.com.carstore.servlet;
 
+import br.com.carstore.dao.CarDao;
+import br.com.carstore.model.Car;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,36 +10,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet("/create-car")
 public class CreateCarServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-        String carName = httpServletRequest.getParameter("car-name");
+        CarDao carDao = new CarDao();
 
-        String color = httpServletRequest.getParameter("color");
+        String carId = req.getParameter("id");
+        String carName = req.getParameter("car-name");
 
-        httpServletResponse.setContentType("application/json");
+        Car car = new Car();
 
-        httpServletResponse.setCharacterEncoding("UTF-8");
+        car.setName(carName);
 
-        PrintWriter out = httpServletResponse.getWriter();
+        if (null == carId || carId.isBlank()) {
 
-        try {
+            carDao.createCar(car);
 
-            String json = "{\"name\": \"" + carName + "\",\"color\": \"" + color+ " }";
-
-            httpServletResponse.getWriter().print(json);
-
-        } catch (Exception e) {
-            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            httpServletResponse.getWriter().print("{\"error\": \"Failed to read JSON\"}");
+        } else {
+            car.setId(carId);
+            carDao.updateCar(car);
         }
 
-        out.flush();
+
+        resp.sendRedirect("/find-all-cars");
 
     }
 
 }
+
