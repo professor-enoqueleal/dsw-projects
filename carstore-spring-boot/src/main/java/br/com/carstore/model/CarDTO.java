@@ -6,6 +6,14 @@ public class CarDTO {
 
     private String color;
 
+    public CarDTO() {
+    }
+
+    public CarDTO(String name, String color) {
+        this.name = name;
+        this.color = color;
+    }
+
     public String getName() {
         return name;
     }
