@@ -18,9 +18,9 @@ public class StartupRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        carDao.save(new CarDTO("Fusca", "Azul"));
-        carDao.save(new CarDTO("Civic", "Preto"));
-        System.out.println(carDao.findAll());
+//        carDao.save(new CarDTO("Fusca", "Azul"));
+//        carDao.save(new CarDTO("Civic", "Preto"));
+//        System.out.println(carDao.findAll());
     }
 
 }

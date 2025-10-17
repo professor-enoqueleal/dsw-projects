@@ -1,9 +1,7 @@
 package br.com.carstore.controller;
 
-import br.com.carstore.model.Car;
 import br.com.carstore.model.CarDTO;
 import br.com.carstore.service.CarService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class HomeController {
+public class AdminController {
 
     private CarService carService;
 
-    public HomeController(CarService carService) {
+    public AdminController(CarService carService) {
         this.carService = carService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/admin")
     public String index(Model model) {
 
         model.addAttribute("carDTO", new CarDTO());
@@ -30,7 +28,7 @@ public class HomeController {
 
     }
 
-    @GetMapping("/index")
+    @GetMapping("/admin/index")
     public String indexTwo(Model model) {
 
         model.addAttribute("carDTO", new CarDTO());
@@ -39,7 +37,7 @@ public class HomeController {
 
     }
 
-    @PostMapping("/cars")
+    @PostMapping("/admin/cars")
     public String createCar(@ModelAttribute CarDTO car, Model model) {
 
         carService.save(car);
@@ -52,7 +50,7 @@ public class HomeController {
 
     }
 
-    @GetMapping("/cars")
+    @GetMapping("/admin/cars")
     public String getAllCars(Model model) {
 
         List<CarDTO> cars = carService.findAll();

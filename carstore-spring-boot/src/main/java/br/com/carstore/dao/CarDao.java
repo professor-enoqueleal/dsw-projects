@@ -23,8 +23,13 @@ public class CarDao {
         @Override
         public CarDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
             CarDTO dto = new CarDTO();
+            dto.setId(rs.getString("id"));
             dto.setName(rs.getString("name"));
             dto.setColor(rs.getString("color"));
+            dto.setBrand(rs.getString("brand"));
+            dto.setModel(rs.getString("model"));
+            dto.setYearFabric(rs.getString("year_fabric"));
+            dto.setYearModel(rs.getString("year_model"));
             return dto;
         }
 
@@ -33,7 +38,7 @@ public class CarDao {
     // SELECT * FROM car -> List<CarDTO>
     public List<CarDTO> findAll() {
 
-        String sql = "SELECT name, color FROM car";
+        String sql = "SELECT id, name, color, brand, model, year_fabric, year_model FROM car";
 
         return jdbc.query(sql, rowMapper);
 
@@ -42,9 +47,9 @@ public class CarDao {
     // INSERT INTO car (name, color)
     public void save(CarDTO carDTO) {
 
-        String sql = "INSERT INTO car (name, color) VALUES (?, ?)";
+        String sql = "INSERT INTO car (name, color, brand, model, year_fabric, year_model) VALUES (?, ?, ?, ?, ?, ?)";
 
-        jdbc.update(sql, carDTO.getName(), carDTO.getColor());
+        jdbc.update(sql, carDTO.getName(), carDTO.getColor(), carDTO.getBrand(), carDTO.getModel(), carDTO.getYearFabric(), carDTO.getYearModel());
 
     }
 
@@ -63,6 +68,14 @@ public class CarDao {
         String sql = "UPDATE car SET name = ?, color = ? WHERE id = ?";
 
         jdbc.update(sql, carDTO.getName(), carDTO.getColor(), Long.valueOf(id));
+
+    }
+
+    public CarDTO findById(String id) {
+
+        String sql = "SELECT name, color, brand, model, year_fabric, year_model FROM car WHERE id = ?";
+
+        return jdbc.queryForObject (sql, rowMapper);
 
     }
 

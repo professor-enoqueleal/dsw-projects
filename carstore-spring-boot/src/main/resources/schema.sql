@@ -1,5 +1,9 @@
 CREATE TABLE IF NOT EXISTS car (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255),
-  color VARCHAR(255)
+  color VARCHAR(255),
+  brand VARCHAR(255),
+  model VARCHAR(255),
+  year_fabric VARCHAR(255),
+  year_model VARCHAR(255)
 );

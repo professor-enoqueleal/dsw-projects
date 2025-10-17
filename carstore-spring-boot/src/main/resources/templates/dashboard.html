@@ -17,16 +17,27 @@
 
                 <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Cor</th>
-                    <th>Ações</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Year of Manufacture</th>
+                    <th scope="col">Year of Model</th>
+                    <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="car : ${cars}">
                     <td th:text="${car.name}"></td>
                     <td th:text="${car.color}"></td>
-                    <td><!-- Ações futuras: editar/    --></td>
+                    <td th:text="${car.brand}"></td>
+                    <td th:text="${car.model}"></td>
+                    <td th:text="${car.yearFabric}"></td>
+                    <td th:text="${car.yearModel}"></td>
+                    <td>
+                        <button type="button" class="btn btn-secondary btn-sm disabled">Update</button>
+                        <button type="button" class="btn btn-danger btn-sm disabled">Delete</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
