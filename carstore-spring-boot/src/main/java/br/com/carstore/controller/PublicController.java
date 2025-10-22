@@ -40,7 +40,8 @@ public class PublicController {
 
         CarDTO carDTO = carService.findById(id);
 
-        model.addAttribute("carDTO", new CarDTO());
+        // Adiciona o DTO obtido ao model para que o template possa mostrar os valores
+        model.addAttribute("car", carDTO);
 
         return "public/detail";
 

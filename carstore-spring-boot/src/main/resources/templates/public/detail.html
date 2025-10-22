@@ -1,4 +1,4 @@
-<html lang="pt-br" xmlns:th="[http://www.thymeleaf.org](http://www.thymeleaf.org)">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +8,21 @@
     <title>Car Store</title>
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+
+    <style>
+        /* Limita a imagem da detail: mantém proporção, não ultrapassa altura máxima e se ajusta em telas pequenas */
+        .detail-image {
+            max-height: 420px; /* ajuste conforme necessário */
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        /* Pequeno espaçamento para o bloco de texto à esquerda */
+        .detail-text {
+            padding-right: 1rem;
+        }
+    </style>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -68,39 +83,44 @@
             <h1 class="h2">Details</h1>
             <hr>
 
+            <div class="row align-items-center">
 
-            <div class="row">
-                <div class="col">
+                <!-- texto: ocupa 12 col em telas pequenas e 6 col em md+ -->
+                <div class="col-12 col-md-6 detail-text">
 
-                    <div>
-                        <label>Model</label>
-                        <p class="fs-5 fw-bold">${car.name}</p>
+                    <div class="mb-3">
+                        <label class="form-label">Model</label>
+                        <p class="fs-5 fw-bold" th:text="${car.name}">Model name</p>
                     </div>
 
-                    <div>
-                        <label>Brand</label>
-                        <p class="fs-5 fw-bold">${car.brand}</p>
+                    <div class="mb-3">
+                        <label class="form-label">Brand</label>
+                        <p class="fs-5 fw-bold" th:text="${car.brand}">Brand</p>
                     </div>
 
-                    <div>
-                        <label>Version</label>
-                        <p class="fs-5 fw-bold">${car.model}</p>
+                    <div class="mb-3">
+                        <label class="form-label">Version</label>
+                        <p class="fs-5 fw-bold" th:text="${car.model}">Model</p>
                     </div>
 
-                    <div>
-                        <label>Year</label>
-                        <p class="fs-5 fw-bold">${car.year} / ${car.yearModel}</p>
+                    <div class="mb-3">
+                        <label class="form-label">Year</label>
+                        <p class="fs-5 fw-bold" th:text="${car.yearFabric} + ' / ' + ${car.yearModel}">Year</p>
                     </div>
 
                 </div>
 
-                <div class="col">
-                    <img src="${car.image}" alt=">${car.name} | ${car.model}" class="img-fluid">
+                <!-- imagem: ocupa 12 col em telas pequenas, 6 col em md+; centralizada vertical e horizontalmente -->
+                <div class="col-12 col-md-6 d-flex justify-content-center">
+                    <img class="img-fluid rounded detail-image"
+                         src="https://www.wikihow.com/images_en/thumb/1/18/Draw-a-Cartoon-Car-Step-8-Version-3.jpg/v4-1200px-Draw-a-Cartoon-Car-Step-8-Version-3.jpg"
+                         alt="car image">
                 </div>
+
             </div>
 
-
         </div>
+
     </div>
 
 </main>

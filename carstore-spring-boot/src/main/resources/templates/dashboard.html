@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="[http://www.thymeleaf.org](http://www.thymeleaf.org)">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
@@ -35,9 +35,14 @@
                     <td th:text="${car.yearFabric}"></td>
                     <td th:text="${car.yearModel}"></td>
                     <td>
-                        <button type="button" class="btn btn-secondary btn-sm disabled">Update</button>
-                        <button type="button" class="btn btn-danger btn-sm disabled">Delete</button>
-                    </td>
+                        <!-- Link que carrega o formulário de edição preenchido -->
+                        <a th:href="@{/admin/cars/edit(id=${car.id})}" class="btn btn-secondary btn-sm">Update</a>
+                         <!-- Formulário de delete: envia POST para /admin/cars/delete com o id do carro -->
+                         <form th:action="@{/admin/cars/delete}" method="post" style="display:inline">
+                             <input type="hidden" name="id" th:value="${car.id}" />
+                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                         </form>
+                     </td>
                 </tr>
                 </tbody>
             </table>

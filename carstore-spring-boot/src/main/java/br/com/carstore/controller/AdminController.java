@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -40,13 +41,17 @@ public class AdminController {
     @PostMapping("/admin/cars")
     public String createCar(@ModelAttribute CarDTO car, Model model) {
 
-        carService.save(car);
+        if (car.getId() != null && !car.getId().isBlank()) {
 
-        List<CarDTO> cars = carService.findAll();
+            carService.update(car.getId(), car);
 
-        model.addAttribute("cars", cars);
+        } else {
 
-        return "dashboard";
+            carService.save(car);
+
+        }
+
+        return "redirect:/admin/cars";
 
     }
 
@@ -61,5 +66,32 @@ public class AdminController {
 
     }
 
+    @GetMapping("/admin/cars/edit")
+    public String editCar(@RequestParam("id") String id, Model model) {
+
+        CarDTO car = carService.findById(id);
+
+        if (car == null) {
+
+            return "redirect:/admin/cars";
+
+        }
+        model.addAttribute("carDTO", car);
+
+        return "index";
+
+    }
+
+    @PostMapping("/admin/cars/delete")
+    public String deleteCar(@RequestParam("id") String id, Model model) {
+
+        carService.deleteById(id);
+
+        List<CarDTO> cars = carService.findAll();
+        model.addAttribute("cars", cars);
+
+        return "redirect:/admin/cars";
+
+    }
 
 }
