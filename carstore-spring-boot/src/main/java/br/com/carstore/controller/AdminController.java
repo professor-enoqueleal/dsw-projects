@@ -25,7 +25,7 @@ public class AdminController {
 
         model.addAttribute("carDTO", new CarDTO());
 
-        return "index";
+        return "admin/index";
 
     }
 
@@ -34,7 +34,7 @@ public class AdminController {
 
         model.addAttribute("carDTO", new CarDTO());
 
-        return "index";
+        return "admin/index";
 
     }
 
@@ -62,7 +62,7 @@ public class AdminController {
 
         model.addAttribute("cars", cars);
 
-        return "dashboard";
+        return "admin/dashboard";
 
     }
 
@@ -78,7 +78,7 @@ public class AdminController {
         }
         model.addAttribute("carDTO", car);
 
-        return "index";
+        return "admin/index";
 
     }
 
