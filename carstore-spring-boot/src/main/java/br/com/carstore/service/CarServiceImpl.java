@@ -1,54 +1,52 @@
 package br.com.carstore.service;
 
-import br.com.carstore.dao.CarDao;
+import br.com.carstore.dao.CarJpaDao;
 import br.com.carstore.model.CarDTO;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CarServiceImpl implements CarService  {
+public class CarServiceImpl implements CarService {
 
-    private final CarDao carDao;
+    private final CarJpaDao carJpaDao;
 
-    public CarServiceImpl(CarDao carDao) {
-        this.carDao = carDao;
+    public CarServiceImpl(CarJpaDao carJpaDao) {
+        this.carJpaDao = carJpaDao;
     }
-
 
     @Override
     public List<CarDTO> findAll() {
 
-        return carDao.findAll();
+        return carJpaDao.findAll();
 
     }
 
     @Override
     public void save(CarDTO carDTO) {
 
-        carDao.save(carDTO);
+        carJpaDao.save(carDTO);
 
     }
 
     @Override
     public void deleteById(String id) {
 
-        carDao.deleteById(id);
+        carJpaDao.deleteById(id);
 
     }
 
     @Override
     public void update(String id, CarDTO carDTO) {
 
-        carDao.update(id, carDTO);
+        carJpaDao.update(id, carDTO);
 
     }
 
     @Override
     public CarDTO findById(String id) {
 
-        return carDao.findById(id);
+        return carJpaDao.findById(id);
 
     }
 

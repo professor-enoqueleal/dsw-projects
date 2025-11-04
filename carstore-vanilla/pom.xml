@@ -6,7 +6,7 @@
   <artifactId>carstore-vanilla</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>carstore Maven Webapp</name>
+  <name>carstore-vanilla</name>
   <url>http://maven.apache.org</url>
 
   <dependencies>

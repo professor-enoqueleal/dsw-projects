@@ -11,7 +11,7 @@
 	<groupId>br.com.carstore</groupId>
 	<artifactId>carstore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>carstore</name>
+	<name>carstore-spring-boot</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -75,11 +75,12 @@
 		</dependency>
 
 		<!-- Spring JDBC (JdbcTemplate) -->
+        <!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-
+        -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -108,6 +109,11 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.11.5</version>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
 	</dependencies>
