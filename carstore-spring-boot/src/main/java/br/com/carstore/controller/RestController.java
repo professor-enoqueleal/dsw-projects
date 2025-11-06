@@ -4,6 +4,8 @@ import br.com.carstore.model.CarDTO;
 import br.com.carstore.model.CarResponseEntity;
 import br.com.carstore.service.CarService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +39,7 @@ public class RestController {
 
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/api/cars/{id}")
     public ResponseEntity<Void> updateCar(@PathVariable("id") String id, @RequestBody CarDTO carDTO) {
 
@@ -60,6 +63,7 @@ public class RestController {
 
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/api/cars/{id}")
     public ResponseEntity<Void> deleteCar(@PathVariable("id") String id) {
         try {

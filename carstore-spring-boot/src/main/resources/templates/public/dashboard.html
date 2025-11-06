@@ -1,4 +1,4 @@
-<html lang="pt-br" xmlns:th="[http://www.thymeleaf.org](http://www.thymeleaf.org)">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,14 +34,18 @@
             <div class="position-sticky pt-3 sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active"href="/admin">
+                        <a class="nav-link active" href="/admin">
                             <span>Home</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                         <a class="nav-link" href="/create-car.jsp">
                             <span>New Car</span>
                         </a>
+                    </li>
+                    <!-- DEBUG: mostra usuário e authorities (remover em produção) -->
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <small class="text-muted px-3">User: <span th:text="${#authentication.name}"></span> — Roles: <span th:text="${#authentication.authorities}"></span></small>
                     </li>
                 </ul>
             </div>
@@ -52,7 +56,7 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
+                    <div class="btn-group me-2" sec:authorize="hasRole('ADMIN')">
                         <a class="btn btn-sm btn-outline-secondary" href="/create-car.jsp" role="button">New Car</a>
                     </div>
                 </div>
@@ -80,7 +84,7 @@
                             <td th:text="${car.yearFabric}"></td>
                             <td th:text="${car.yearModel}"></td>
                             <td>
-                                <form action="/delete-car" method="post">
+                                <form action="/delete-car" method="post" sec:authorize="hasRole('ADMIN')">
                                     <input type="hidden" id="id" name="id" value="${car.id}">
                                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                                 </form>
